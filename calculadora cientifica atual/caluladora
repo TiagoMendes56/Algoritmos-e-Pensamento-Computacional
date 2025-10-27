@@ -1,4 +1,3 @@
-
 #include <stdio.h> //biblioteca padrão de entrada/saída (printf, scanf, FILE, etc)
 
 #include <math.h> //biblioteca matemática (sqrt, pow, sin, cos, tan, log, exp, etc)
