@@ -1,0 +1,26 @@
+Funções Essenciais de Manipulação de Arquivos em C
+
+A biblioteca <stdio.h> oferece diversas funções para interagir com arquivos. Conheça as mais importantes:
+-fopen()
+
+Abre um arquivo, retornando um ponteiro para FILE. Essencial para iniciar qualquer operação de leitura ou escrita.
+
+-fread()
+
+Lê blocos de dados de um arquivo binário, transferindo conteúdo bruto para a memória.
+
+-fprintf()
+
+Escreve dados formatados (strings, números) em um arquivo de texto, de forma similar ao printf().
+
+-fclose()
+
+Fecha um arquivo, liberando os recursos associados e garantindo a gravação de dados pendentes.
+
+-fwrite()
+
+Escreve blocos de dados brutos da memória para um arquivo binário.
+
+-fscanf()
+
+Lê dados formatados de um arquivo de texto, extraindo informações específicas do conteúdo.

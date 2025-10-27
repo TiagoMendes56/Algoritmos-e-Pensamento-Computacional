@@ -1,0 +1,253 @@
+atividade20/10/2025
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h> // Para tolower()
+
+// Definindo a estrutura para um produto
+typedef struct {
+    char nome[50];
+    char unidade[20]; // Ex: "kg", "unidade", "litro"
+    float valorUnitario;
+    int quantidade;
+} Produto;
+
+// Tamanho máximo do estoque
+#define MAX_ESTOQUE 100
+
+// Array de produtos e contador de produtos no estoque
+Produto estoque[MAX_ESTOQUE];
+int numProdutos = 0;
+
+// Função para limpar o buffer do teclado
+void limparBufferEntrada() {
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF);
+}
+
+// Função para validar se a entrada é um número float positivo
+float obterFloatPositivo(const char *mensagem) {
+    float valor;
+    int resultado;
+    do {
+        printf("%s", mensagem);
+        resultado = scanf("%f", &valor);
+        limparBufferEntrada(); // Limpa o buffer após scanf
+
+        if (resultado != 1 || valor < 0) {
+            printf("Entrada inválida. Por favor, insira um número positivo.\n");
+        }
+    } while (resultado != 1 || valor < 0);
+    return valor;
+}
+
+// Função para validar se a entrada é um número inteiro positivo
+int obterIntPositivo(const char *mensagem) {
+    int valor;
+    int resultado;
+    do {
+        printf("%s", mensagem);
+        resultado = scanf("%d", &valor);
+        limparBufferEntrada(); // Limpa o buffer após scanf
+
+        if (resultado != 1 || valor < 0) {
+            printf("Entrada inválida. Por favor, insira um número inteiro positivo.\n");
+        }
+    } while (resultado != 1 || valor < 0);
+    return valor;
+}
+
+// Função para cadastrar um novo produto
+void cadastrarProduto() {
+    if (numProdutos >= MAX_ESTOQUE) {
+        printf("Estoque cheio! Não é possível cadastrar mais produtos.\n");
+        return;
+    }
+
+    printf("\n--- Cadastrar Novo Produto ---\n");
+
+    // Limpa o buffer antes de ler strings com espaços
+    limparBufferEntrada(); 
+
+    printf("Nome do produto: ");
+    fgets(estoque[numProdutos].nome, sizeof(estoque[numProdutos].nome), stdin);
+    estoque[numProdutos].nome[strcspn(estoque[numProdutos].nome, "\n")] = '\0'; // Remove o \n
+
+    printf("Unidade (ex: kg, unidade): ");
+    fgets(estoque[numProdutos].unidade, sizeof(estoque[numProdutos].unidade), stdin);
+    estoque[numProdutos].unidade[strcspn(estoque[numProdutos].unidade, "\n")] = '\0'; // Remove o \n
+
+    estoque[numProdutos].valorUnitario = obterFloatPositivo("Valor unitário: ");
+    estoque[numProdutos].quantidade = obterIntPositivo("Quantidade em estoque: ");
+
+    printf("Produto '%s' cadastrado com sucesso!\n", estoque[numProdutos].nome);
+    numProdutos++;
+}
+
+// Função para listar todos os produtos no estoque
+void listarProdutos() {
+    if (numProdutos == 0) {
+        printf("\nO estoque está vazio.\n");
+        return;
+    }
+
+    printf("\n--- Lista de Produtos no Estoque ---\n");
+    for (int i = 0; i < numProdutos; i++) {
+        printf("Produto #%d:\n", i + 1);
+        printf("  Nome: %s\n", estoque[i].nome);
+        printf("  Unidade: %s\n", estoque[i].unidade);
+        printf("  Valor Unitário: R$ %.2f\n", estoque[i].valorUnitario);
+        printf("  Quantidade: %d\n", estoque[i].quantidade);
+        printf("----------------------------------\n");
+    }
+}
+
+// Função para buscar um produto pelo nome
+void buscarProduto() {
+    if (numProdutos == 0) {
+        printf("\nO estoque está vazio. Nada para buscar.\n");
+        return;
+    }
+
+    char nomeBusca[50];
+    printf("\n--- Buscar Produto ---\n");
+    printf("Digite o nome do produto para buscar: ");
+    limparBufferEntrada(); // Garante que o buffer está limpo antes do fgets
+    fgets(nomeBusca, sizeof(nomeBusca), stdin);
+    nomeBusca[strcspn(nomeBusca, "\n")] = '\0'; // Remove o \n
+
+    int encontrado = 0;
+    for (int i = 0; i < numProdutos; i++) {
+        // Usa strcasecmp para comparação de strings sem diferenciar maiúsculas/minúsculas
+        // ou implementa manualmente se strcasecmp não for padrão C:
+        // (Para fins de exercício e compatibilidade, vamos usar strcmp com conversão para minúsculas)
+        char nomeProdutoLower[50];
+        char nomeBuscaLower[50];
+        int j = 0;
+        while (estoque[i].nome[j]) {
+            nomeProdutoLower[j] = tolower(estoque[i].nome[j]);
+            j++;
+        }
+        nomeProdutoLower[j] = '\0';
+
+        j = 0;
+        while (nomeBusca[j]) {
+            nomeBuscaLower[j] = tolower(nomeBusca[j]);
+            j++;
+        }
+        nomeBuscaLower[j] = '\0';
+
+        if (strcmp(nomeProdutoLower, nomeBuscaLower) == 0) {
+            printf("\nProduto encontrado:\n");
+            printf("  Nome: %s\n", estoque[i].nome);
+            printf("  Unidade: %s\n", estoque[i].unidade);
+            printf("  Valor Unitário: R$ %.2f\n", estoque[i].valorUnitario);
+            printf("  Quantidade: %d\n", estoque[i].quantidade);
+            printf("----------------------------------\n");
+            encontrado = 1;
+            break; // Produto encontrado, sai do loop
+        }
+    }
+
+    if (!encontrado) {
+        printf("Produto '%s' não encontrado no estoque.\n", nomeBusca);
+    }
+}
+
+// Função para excluir um produto pelo nome
+void excluirProduto() {
+    if (numProdutos == 0) {
+        printf("\nO estoque está vazio. Nada para excluir.\n");
+        return;
+    }
+
+    char nomeExcluir[50];
+    printf("\n--- Excluir Produto ---\n");
+    printf("Digite o nome do produto para excluir: ");
+    limparBufferEntrada(); // Garante que o buffer está limpo antes do fgets
+    fgets(nomeExcluir, sizeof(nomeExcluir), stdin);
+    nomeExcluir[strcspn(nomeExcluir, "\n")] = '\0'; // Remove o \n
+
+    int encontrado = 0;
+    for (int i = 0; i < numProdutos; i++) {
+        char nomeProdutoLower[50];
+        char nomeExcluirLower[50];
+        int j = 0;
+        while (estoque[i].nome[j]) {
+            nomeProdutoLower[j] = tolower(estoque[i].nome[j]);
+            j++;
+        }
+        nomeProdutoLower[j] = '\0';
+
+        j = 0;
+        while (nomeExcluir[j]) {
+            nomeExcluirLower[j] = tolower(nomeExcluir[j]);
+            j++;
+        }
+        nomeExcluirLower[j] = '\0';
+
+        if (strcmp(nomeProdutoLower, nomeExcluirLower) == 0) {
+            // Move os elementos seguintes uma posição para trás
+            for (int k = i; k < numProdutos - 1; k++) {
+                estoque[k] = estoque[k + 1];
+            }
+            numProdutos--;
+            printf("Produto '%s' excluído com sucesso!\n", nomeExcluir);
+            encontrado = 1;
+            break; // Produto encontrado e excluído, sai do loop
+        }
+    }
+
+    if (!encontrado) {
+        printf("Produto '%s' não encontrado no estoque para exclusão.\n", nomeExcluir);
+    }
+}
+
+int main() {
+    int opcao;
+
+    do {
+        printf("\n--- Sistema de Gerenciamento de Estoque ---\n");
+        printf("1. Cadastrar Produto\n");
+        printf("2. Listar Produtos\n");
+        printf("3. Buscar Produto\n");
+        printf("4. Excluir Produto\n");
+        printf("0. Sair\n");
+        printf("Escolha uma opção: ");
+
+        // Validação da entrada do menu
+        if (scanf("%d", &opcao) != 1) {
+            printf("Entrada inválida. Por favor, insira um número.\n");
+            limparBufferEntrada(); // Limpa o buffer em caso de erro
+            opcao = -1; // Define uma opção inválida para repetir o loop
+            continue;
+        }
+        limparBufferEntrada(); // Limpa o buffer após scanf
+
+        switch (opcao) {
+            case 1:
+                cadastrarProduto();
+                break;
+            case 2:
+                listarProdutos();
+                break;
+            case 3:
+                buscarProduto();
+                break;
+            case 4:
+                excluirProduto();
+                break;
+            case 0:
+                printf("Saindo do programa. Até mais!\n");
+                break;
+            default:
+                printf("Opção inválida. Por favor, tente novamente.\n");
+                break;
+        }
+    } while (opcao != 0);
+
+    return 0;
+}

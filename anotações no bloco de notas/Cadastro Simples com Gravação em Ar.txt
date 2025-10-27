@@ -1,0 +1,16 @@
+Cadastro Simples com Gravação em Arquivo
+#include <stdio.h>
+int main()
+{
+FILE *f = fopen("alunos.txt", "w");
+char nome [30];
+int idade;
+ printf("digite nome e idade:");
+ scanf("%s %d", nome, &idade);
+ fprintf(f, "Nome:%s- Idade:%d ", nome, idade);
+ fclose(f);
+ return 0;
+
+  }
+
+Rode em c no gdb online!!!
