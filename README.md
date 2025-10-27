@@ -1,4 +1,5 @@
 CALCULADORA CIENTÍFICA - V2
+
 Este projeto é uma calculadora científica na linguagem C que suporta 36 funções, divididas em 33 funções matemáticas e funções de saída da calculadora, mostrar e limpar histórico. O usuário pode acessar o menu interativo para escolher a operação desejada.
 
 Tecnologias e Recursos Utilizados
