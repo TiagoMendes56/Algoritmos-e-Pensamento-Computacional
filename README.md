@@ -1,7 +1,7 @@
 <h1 align="center"> PROJETO DE ORDENAÇÃO</h1>
 
 
-## Entrada A (RGM): 
+ Entrada A (RGM): 
 
  - O usuário informa seu RGM (8 dígitos).  
  - Cada dígito é convertido para inteiro.  
@@ -9,7 +9,7 @@
  - São registrados tempo e número de passos (operações-chave).
 A saída final é exibida em formato **CSV**, permitindo importar em Excel, Python, R, etc.
 
-##Entrada B (Benchmark):
+Entrada B (Benchmark):
    - Geração de vetores aleatórios nos tamanhos N = 100, 1.000, 10.000.  
    - Cada vetor é ordenado com Bubble Sort.  
    - São registradas métricas de desempenho.  
