@@ -1,20 +1,13 @@
 <h1 align="center"> PROJETO DE ORDENAÇÃO</h1>
 
-Este projeto é uma calculadora científica na linguagem C que suporta 36 funções, divididas em 33 funções matemáticas e 3 funções, incluindo de saída da calculadora, mostrar e limpar histórico. O usuário pode acessar o menu interativo para escolher a operação desejada.
 
-## Tecnologias e Recursos Utilizados
+## Entrada A (RGM): 
 
-**Linguagem:** C 
-
-**Bibliotecas padrão:**
-- `<stdio.h>` — entrada e saída de dados
-- `<math.h>` — funções matemáticas avançadas
-
-**Funções matemáticas da `<math.h>`:**
-- **Trigonométricas:** `sin()`, `cos()`, `tan()`
-- **Potência e raiz:** `pow()`, `sqrt()`
-- **Logaritmos:** `log()` (ln), `log10()` (base 10)
-- **Exponencial:** `exp()` (e^x)
+ - O usuário informa seu RGM (8 dígitos).  
+ - Cada dígito é convertido para inteiro.  
+ - O vetor é ordenado com Bubble Sort.  
+ - São registrados tempo e número de passos (operações-chave).
+A saída final é exibida em formato **CSV**, permitindo importar em Excel, Python, R, etc.
 
 **Constantes:**
 - `M_PI` — cálculos trigonométricos e geométricos
