@@ -9,11 +9,19 @@
  - São registrados tempo e número de passos (operações-chave).
 A saída final é exibida em formato **CSV**, permitindo importar em Excel, Python, R, etc.
 
-**Constantes:**
-- `M_PI` — cálculos trigonométricos e geométricos
+**Entrada B (Benchmark):**
+   - Geração de vetores aleatórios nos tamanhos N = 100, 1.000, 10.000.  
+   - Cada vetor é ordenado com Bubble Sort.  
+   - São registradas métricas de desempenho.  
+   - Cada caso é executado 5 vezes, calculando a média.
 
-**Estruturas de dados:**
-- Arrays (`double[]`) — utilizados para adição de múltiplos números e cálculo de média aritmética
+**Bubble Sort foi escolhido porque:**
+1. É extremamente simples de implementar.
+2. Sua lógica facilita a contagem de passos.
+3. É útil para fins didáticos na comparação entre custos teóricos e experimentais.
+4. Mostra claramente problemas de escalabilidade em entradas grandes.
+Como este trabalho solicita somente Bubble Sort, a escolha foi intencional para demonstrar limites computacionais.
+
 
 **Estruturas de controle:**
 - `do-while` — loop principal da calculadora
