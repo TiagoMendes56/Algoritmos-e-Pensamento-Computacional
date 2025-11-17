@@ -23,52 +23,20 @@ A saída final é exibida em formato **CSV**, permitindo importar em Excel, Pyth
 Como este trabalho solicita somente Bubble Sort, a escolha foi intencional para demonstrar limites computacionais.
 
 
-**Estruturas de controle:**
-- `do-while` — loop principal da calculadora
-- `switch-case` — seleção de operações (36 cases)
-- `if-else` — validação de entrada e tratamento de erros
+**Como compilar e executar**
+-No terminal, dentro da pasta do projeto:
+gcc -O1 -std=c11 src/*.c -o ordena
 
-**Tratamento de erros:**
-- Divisão por zero
-- Raiz quadrada de número negativo<br>
-- Logaritmo de número não positivo
-- Validação de entradas inválidas
+**O tempo é medido usando:**
+ clock_t t0 = clock();
+...
+tempo_ms = (clock() - t0) * 1000.0 / CLOCKS_PER_SEC;
 
-**Compilador:** GCC
+**Saída em Formato CSV**
+-Estrutura da saída:
 
-## Como usar este projeto?
+metodo,N,caso,passos,tempo_ms
 
-### 1. Download
-Baixe o arquivo `calculadoraVersao2.0` deste repositório.
-
-### 2. Abrir na IDE ou ONLINE (GDB)
-- Abra o arquivo no Dev-C++, Code::Blocks, Visual Studio ou sua IDE de preferência
-- Certifique-se de que a IDE está configurada para usar um compilador C
-
-### 3. Compilar e Executar
-- Compile o projeto
-- Execute o programa
-
-## Exemplos de Uso:
-
-### Exemplo 1: SENO
-- Escolha a opção 7  
-- Digite o ângulo em graus: 30  
-- o seno é: 0.50
-
-### Exemplo 2: Celsius para Fahrenheit
-- Escolha a opção 21  
-- Digite o número em celsius 100  
-- 100 celsius sao 212 fahrenheit
-
-### Informações adicionais:
-
-O programa utiliza um loop do-while, permitindo que o usuário realize várias operações sem reiniciar.
-Para sair da calculadora, basta escolher a opção 0 (sair) ou responder "n" quando perguntado ao final de uma operação se deseja continuar.
-
-O código possui tratamento para erros.  
-***Exemplos:***  
-1-Divisão por zero  
-2-Raiz de número negativo  
-3-Logaritmo de número não positivo
-
+**Conclusão**
+O Bubble Sort cumpre seu papel didático, mas é ineficiente para tamanhos reais.
+O estudo demonstra claramente por que algoritmos quadráticos não escalam bem.
